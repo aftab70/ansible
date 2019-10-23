@@ -7,6 +7,8 @@ apt-get install ansible
 echo "Configuring Ansible Hosts"
 echo "nano /etc/ansible/hosts"
 
+hostname_here ansible_host=192.168.1.10 ansible_ssh_pass=PASSWORD ansible_port=22 ansible_user=root
+
 
 
 
