@@ -19,7 +19,27 @@ ansible hostname_here -m ping
 
 ansible -m ping all
 
-# 
+# Create a playbook directory to store playbooks.
+
+mkdir ~/ansible-playbook
+
+cd ansible-playbook/
+
+nano playbook.yml
+---------------------------------------------------------------------------------------------------------------------------------
+-
+  name: This is my first playbook.
+  hosts: server_name_here
+  tasks:
+    -
+      name: "This is echo example"
+      command: echo "touch /tmp/ansible.txt"
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
