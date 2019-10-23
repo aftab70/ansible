@@ -7,7 +7,21 @@ apt-get install ansible
 echo "Configuring Ansible Hosts"
 echo "nano /etc/ansible/hosts"
 
+# You can addd the server details like this:-
+
 hostname_here ansible_host=192.168.1.10 ansible_ssh_pass=PASSWORD ansible_port=22 ansible_user=root
+
+# ping commands 
+
+ansible hostname_here -m ping
+
+# Ping for all server
+
+ansible -m ping all
+
+# 
+
+
 
 
 
