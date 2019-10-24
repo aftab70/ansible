@@ -42,7 +42,7 @@ nano playbook.yml
   tasks:
     -
       name: "This is echo example"
-      command: echo "touch /tmp/ansible.txt"
+      command: touch /tmp/ansible.txt
 
 --------------------------------------------------------------------------------------------------------------------------------
 
