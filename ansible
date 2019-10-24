@@ -9,17 +9,22 @@ echo "nano /etc/ansible/hosts"
 
 # You can addd the server details like this:-
 
-hostname_here ansible_host=192.168.1.10 ansible_ssh_pass=PASSWORD ansible_port=22 ansible_user=root
+nano /etc/ansible/hosts
+----------------------------------------------------------------------------------------------------
+
+[GROUP_NAME_HERE] 
+IP_ADDRESS_HERE ansible_user=USERNAME_HERE ansible_ssh_pass=PASSWORD ansible_port=PORT_HERE    # username and passowrd config.
+IP_ADDRESS_HERE ansible_user=USERNAME_HERE ansible_ssh_private_key_file=PATH_OF_THE_KEY ansible_port=PORT_HERE # Key based config.
+
+# Save and exit
 
 # ping commands 
 
-ansible hostname_here -m ping
+ansible IP_Address_here -m ping
+ansible all -m ping
+ansible GROUP_NAME -m ping
 
-# Ping for all server
-
-ansible -m ping all
-
-# Create a playbook directory to store playbooks.
+ # Create a playbook directory to store playbooks.
 
 mkdir ~/ansible-playbook
 
