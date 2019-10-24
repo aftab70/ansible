@@ -5,8 +5,11 @@ apt-add-repository ppa:ansible/ansible
 apt-get update 
 apt-get install ansible -y
 
-echo "Configuring Ansible Hosts"
-echo "nano /etc/ansible/hosts"
+echo "vim /etc/ansible/ansible.cfg  -  Ansible configration"
+echo "vim /etc/ansible/hosts        -  Ansible Host configuration"
+echo "vim /etc/ansible/roles        -  cd /etc/ansible/roles"
+
+################################################################################################################################
 
 # You can addd the server details like this:-
 
