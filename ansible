@@ -1,8 +1,9 @@
+############################################## Ansible Installation Ubuntu 16.04 ###############################################
 #!/bin/bash
 
 apt-add-repository ppa:ansible/ansible
-apt-get update
-apt-get install ansible
+apt-get update 
+apt-get install ansible -y
 
 echo "Configuring Ansible Hosts"
 echo "nano /etc/ansible/hosts"
