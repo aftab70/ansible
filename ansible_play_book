@@ -32,7 +32,7 @@ ansible-playbook ~/ansible-playbook/apache2.yml -k -K
 ###################################################################################################################################
 
 ---
-- hosts: 192.168.0.33
+- hosts: 10.10.10.10
   become: yes
   become_user: root
   become_method: sudo
