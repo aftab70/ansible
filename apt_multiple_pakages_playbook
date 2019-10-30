@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+    - name: install lamp stack
+      apt:
+        pkg:
+          - apache2
+          - mysql-server
+          - curl
+        state: present
+        update_cache: yes
