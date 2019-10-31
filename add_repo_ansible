@@ -1,7 +1,0 @@
-- hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  tasks:
-    - name: add repo
-      apt_repository: repo="ppa:ondrej/php" state=absent
