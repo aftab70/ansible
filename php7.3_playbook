@@ -1,0 +1,77 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Installation install software-properties-common
+      apt: name=software-properties-common
+
+    - name: "Repo PHP 7.3"
+      apt_repository:
+        repo="ppa:ondrej/php"
+        update_cache=yes
+
+    - name: Installation PHP 7.3
+      apt: name=php7.3
+      
+------------------------------------------------------------------------------------------------------------------------------
+
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Installation install software-properties-common
+      apt: name=software-properties-common
+
+    - name: "Repo PHP 7.2"
+      apt_repository:
+        repo="ppa:ondrej/php"
+        update_cache=yes
+
+    - name: Installation PHP 7.2
+      apt: name=php7.2
+      
+------------------------------------------------------------------------------------------------------------------------------
+
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Installation install software-properties-common
+      apt: name=software-properties-common
+
+    - name: "Repo PHP 7.1"
+      apt_repository:
+        repo="ppa:ondrej/php"
+        update_cache=yes
+
+    - name: Installation PHP 7.1
+      apt: name=php7.1
+      
+-----------------------------------------------------------------------------------------------------------------------------
+
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Installation install software-properties-common
+      apt: name=python-software-properties
+
+    - name: "Repo PHP 7.0"
+      apt_repository:
+        repo="ppa:ondrej/php"
+        update_cache=yes
+
+    - name: Installation PHP 7.0
+      apt: name=php7.0
+      
+------------------------------------------------------------------------------------------------------------------------------
+
+
