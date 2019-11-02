@@ -45,6 +45,9 @@
 
     - name: Creating service for Apache tomcat.
       command: chmod +x /etc/systemd/system/tomcat.service  
-      
+ 
+    - name: Deamon reload.
+      command: systemctl daemon-reload
+ 
     - name: Starting Apache Tomcat service.
       service: name=tomcat state=started
