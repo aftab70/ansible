@@ -19,11 +19,11 @@
       shell: curl -O http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47.tar.gz      
       args:
         chdir: /tmp
-    - name: Installating JDK.
+    - name: Creating Apache Tomcat home directory.
       command: mkdir /opt/tomcat
       
     - name: Extracting Apache Tomcat.
-      shell: tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+      shell: tar -xzvf /tmp/apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
       
     - name: Updating permission.
       command: "{{ item }}"
@@ -31,8 +31,15 @@
         - chown -R tomcat:tomcat /opt/tomcat
         - chmod -R g+r /opt/tomcat/conf
         - chmod g+x /opt/tomcat/conf
-  
-
-
         
-     
+    - name: Creating service for Apache tomcat.
+      command: touch /etc/systemd/system/tomcat.service
+      
+    - name: Updating service config.
+      shell: wget -O /etc/systemd/system/tomcat.service wget -O /etc/metricbeat/metricbeat.yml https://raw.githubusercontent.com/aftab70/Apache_Tomcat/master/tomcat_services
+      
+    - name: Creating service for Apache tomcat.
+      command: chmod +x /etc/systemd/system/tomcat.service  
+      
+    - name: Starting Apache Tomcat service.
+      service: name=tomcat state=started
