@@ -49,4 +49,13 @@ tmpfs           5.9G     0  5.9G   0% /sys/fs/cgroup
 ##############################################################################################################################
 
 
+ansible all -m apt -a "name=vim state=latest" -u root
+You can also target individual hosts, as well as groups and subgroups, when running Ansible commands. For instance, this is how you would check the uptime of every host in the servers group:
 
+ansible servers -a "uptime" -u root
+We can specify multiple hosts by separating them with colons:
+
+ansible server1:server2 -m ping -u root
+
+
+#############################################################################################################################
