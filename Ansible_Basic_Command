@@ -1,0 +1,52 @@
+###############################################################################################################################
+# check your inventory
+
+aftab@techbeginner:~$ ansible-inventory --list -y
+all:
+  children:
+    Docker:
+      hosts:
+        192.168.0.10:
+          ansible_host: 192.168.0.10
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_ssh_pass: Password
+    ungrouped: {}
+
+###############################################################################################################################
+
+# Ping all the mahine 
+
+aftab@techbeginner:~$ ansible all -m ping 
+192.168.0.10 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+
+
+###############################################################################################################################
+# check with username 
+
+aftab@techbeginner:~$ ansible all -m ping -u aftab
+192.168.0.10 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+
+
+##############################################################################################################################
+# Running Ad-Hoc Commands (Optional)
+
+aftab@techbeginner:~$ ansible all -a "df -h" -u aftab
+192.168.0.33 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+udev            5.9G     0  5.9G   0% /dev
+tmpfs           1.2G   21M  1.2G   2% /run
+/dev/sda1       453G  284G  147G  66% /
+tmpfs           5.9G  192K  5.9G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           5.9G     0  5.9G   0% /sys/fs/cgroup
+
+##############################################################################################################################
+
+
+
