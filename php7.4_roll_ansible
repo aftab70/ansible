@@ -1,5 +1,6 @@
 ---
-# tasks file for php7.4
+# tasks file for php74
+
 
     - name: Installation install software-properties-common
       apt: name=software-properties-common
@@ -12,7 +13,7 @@
       ignore_errors: yes
 
     - name: Installation PHP 7.4
-      apt: name=php7.3 state=present
+      apt: name=php7.4 state=present
 
     - name: install lamp stack
       apt:
