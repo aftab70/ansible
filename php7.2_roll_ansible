@@ -1,5 +1,6 @@
 ---
-# tasks file for php7.2
+# tasks file for php72
+
 
     - name: Installation install software-properties-common
       apt: name=software-properties-common
@@ -31,3 +32,4 @@
           - php7.2-intl
           - libapache2-mod-php
         state: present
+
