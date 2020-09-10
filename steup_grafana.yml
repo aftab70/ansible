@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: yes
+  vars:
+     DEB_URL: https://dl.grafana.com/oss/master/grafana_7.3.0~575113c1pre_amd64.deb
   tasks:
 
     - name: update
@@ -8,7 +10,7 @@
      
     - name: Installing Grafana
       apt:
-        deb: https://dl.grafana.com/oss/master/grafana_7.3.0~575113c1pre_amd64.deb
+        deb: "{{ DEB_URL }}"
 
     - name: Starting Grafana service.
-      service: name=grafana-server state=started 
+      service: name=grafana-server state=started
