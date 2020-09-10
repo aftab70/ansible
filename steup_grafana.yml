@@ -5,21 +5,10 @@
 
     - name: update
       apt: update_cache=yes   
-
-    - name: Required package installation
-      apt: name={{ item }} state=installed    
-      with_items:
-       - adduser  
-       - libfontconfig1     
-
-    - name: Download Grafana .DEB
-      get_url:
-        url: https://dl.grafana.com/oss/master/grafana_7.3.0~575113c1pre_amd64.deb
-        dest: /tmp
      
     - name: Installing Grafana
       apt:
-        deb: /tmp/grafana_7.3.0~575113c1pre_amd64.deb
+        deb: https://dl.grafana.com/oss/master/grafana_7.3.0~575113c1pre_amd64.deb
 
     - name: Starting Grafana service.
-      service: name=grafana-server state=started  
+      service: name=grafana-server state=started 
