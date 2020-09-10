@@ -1,0 +1,71 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: update
+      apt: update_cache=yes   
+
+    - name: Adding Group and user for Tomcat.
+      shell: useradd --no-create-home --shell /bin/false prometheus
+      
+    - name: Creating Prometheus required directory.
+      command: mkdir /etc/prometheus && mkdir /var/lib/prometheus
+ 
+    - name: Updating permission.
+      command: "{{ item }}"
+      with_items:
+        - chown prometheus:prometheus /etc/prometheus
+        - chown prometheus:prometheus /var/lib/prometheus
+ 
+    - name: Installating curl.
+      apt: name=curl state=latest
+      
+    - name: .Downloading Prometheus
+      shell: curl -LO https://github.com/prometheus/prometheus/releases/download/v2.0.0/prometheus-2.0.0.linux-amd64.tar.gz      
+      args:
+        chdir: /tmp
+ 
+    - name: Configuring Prometheus.
+      file:
+        path: /etc/prometheus/prometheus.yml
+        state: touch
+        mode: u+rwx,g-rwx,o-x
+        
+    - name: Update the config file
+      get_url:
+        url: https://raw.githubusercontent.com/aftab70/grafana/master/config_prometheus.yml
+        dest: /etc/prometheus/prometheus.yml   
+        
+    - name: Extracting Prometheus.
+      shell: tar xvf /tmp/prometheus-2.0.0.linux-amd64.tar.gz
+      
+    - name: Updating permission.
+      command: "{{ item }}"
+      with_items:
+        - cp /tmp/prometheus-2.0.0.linux-amd64/prometheus /usr/local/bin/
+        - cp /tmp/prometheus-2.0.0.linux-amd64/promtool /usr/local/bin/      
+        - chown prometheus:prometheus /usr/local/bin/prometheus
+        - chown prometheus:prometheus /usr/local/bin/promtool
+        - cp -r /tmp/prometheus-2.0.0.linux-amd64/consoles /etc/prometheus
+        - cp -r /tmp/prometheus-2.0.0.linux-amd64/console_libraries /etc/prometheus
+        - chown -R prometheus:prometheus /etc/prometheus/consoles
+        - chown -R prometheus:prometheus /etc/prometheus/console_libraries
+        - chown prometheus:prometheus /etc/prometheus/prometheus.yml     
+      
+    - name: Service configuration.
+      file:
+        path: /etc/systemd/system/prometheus.service
+        state: touch
+        mode: u+rwx,g-rwx,o-x
+
+    - name: Update config file
+      get_url:
+        url: https://raw.githubusercontent.com/aftab70/grafana/master/service_prometheus.yaml
+        dest: /etc/systemd/system/prometheus.service
+ 
+    - name: Deamon reload.
+      command: systemctl daemon-reload
+ 
+    - name: Starting Apache Tomcat service.
+      service: name=prometheus state=started
